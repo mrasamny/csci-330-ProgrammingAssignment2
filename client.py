@@ -51,12 +51,19 @@ def send_file(filename: str, address: (str, int)):
 if __name__ == "__main__":
     # get filename from cmd line
     if len(sys.argv) < 2:
-        print(f'SYNOPSIS: {sys.argv[0]} <filename> [IP address]')
+        print(f'SYNOPSIS: {sys.argv[0]} <filename> [IP address] [Port]')
         sys.exit(1)
     file_name = sys.argv[1]  # filename from cmdline argument
     # if an IP address is provided on cmdline, then use it
     if len(sys.argv) == 3:
         IP = sys.argv[2]
+
+    try:
+        # if port is provided on cmdline, then use it
+        if len(sys.argv) == 4:
+            PORT = int(sys.argv[3])
+    except ValueError as ve:
+        print(ve)
 
     ret_value = send_file(file_name, (IP, PORT))
     sys.exit(ret_value)

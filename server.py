@@ -50,8 +50,14 @@ def start_server(ip, port):
 
 
 if __name__ == '__main__':
-    # get IP address from cmd line
+    # get IP address from cmd line if provided
     if len(sys.argv) == 2:
         IP = sys.argv[1]  # IP from cmdline argument
 
+    try:
+        # get port number from cmd line if provided
+        if len(sys.argv) == 3:
+            PORT = int(sys.argv[2])  # IP from cmdline argument
+    except ValueError as ve:
+        print(ve)
     start_server(IP, PORT)
